@@ -1,0 +1,65 @@
+/*
+==========================================
+SARKIT EdTech Project
+Title: Sound Controlled LED using Arduino
+Description:
+This project uses a sound sensor to control
+an LED. When sound is detected (clap/noise),
+the LED turns ON automatically.
+
+Author: SARKIT EdTech
+==========================================
+*/
+
+
+// ==============================
+// PIN DEFINITIONS
+// ==============================
+int soundPin = 2;     // Sound sensor digital output pin
+int ledPin   = 13;    // Built-in LED pin
+
+
+// ==============================
+// SETUP FUNCTION
+// ==============================
+void setup() {
+
+  // Configure pin modes
+  pinMode(soundPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+
+  // Start serial communication
+  Serial.begin(9600);
+}
+
+
+// ==============================
+// MAIN LOOP
+// ==============================
+void loop() {
+
+  // Read sound sensor state
+  int soundState = digitalRead(soundPin);
+
+  // Print sensor value to Serial Monitor
+  Serial.println(soundState);
+
+
+  // ==============================
+  // SOUND DETECTION LOGIC
+  // ==============================
+  if (soundState == HIGH) {
+
+    // Turn LED ON when sound is detected
+    digitalWrite(ledPin, HIGH);
+
+  } else {
+
+    // Turn LED OFF when no sound is detected
+    digitalWrite(ledPin, LOW);
+  }
+
+
+  // Small delay for stable readings
+  delay(100);
+}
