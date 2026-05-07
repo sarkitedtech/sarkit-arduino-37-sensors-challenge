@@ -1,0 +1,60 @@
+/*
+==========================================
+SARKIT EdTech Project
+Title: Hall Magnetic Sensor using Arduino
+Description:
+This project detects the presence of a magnet
+using a Hall Effect Sensor. The sensor status
+is displayed on the Serial Monitor.
+
+Author: SARKIT EdTech
+==========================================
+*/
+
+
+// ==============================
+// PIN DEFINITIONS
+// ==============================
+const int hallPin = 2;    // Hall sensor digital output pin
+
+
+// ==============================
+// SETUP FUNCTION
+// ==============================
+void setup() {
+
+  // Configure Hall sensor pin as input
+  pinMode(hallPin, INPUT);
+
+  // Start serial communication
+  Serial.begin(9600);
+}
+
+
+// ==============================
+// MAIN LOOP
+// ==============================
+void loop() {
+
+  // Read Hall sensor value
+  int sensorValue = digitalRead(hallPin);
+
+
+  // ==============================
+  // MAGNET DETECTION LOGIC
+  // ==============================
+  if (sensorValue == LOW) {
+
+    // Magnet detected
+    Serial.println("🧲 Magnet Detected!");
+
+  } else {
+
+    // No magnet nearby
+    Serial.println("No Magnet");
+  }
+
+
+  // Small delay for stable readings
+  delay(200);
+}
