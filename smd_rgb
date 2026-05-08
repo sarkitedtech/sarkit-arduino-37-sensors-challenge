@@ -1,0 +1,90 @@
+/*
+==========================================
+SARKIT EdTech Project
+Title: RGB LED Color Control using Arduino
+Description:
+This project demonstrates how to control
+an RGB LED using Arduino PWM pins.
+Different color combinations are created
+by adjusting Red, Green, and Blue values.
+
+Author: SARKIT EdTech
+==========================================
+*/
+
+
+// ==============================
+// PIN DEFINITIONS
+// ==============================
+
+// RGB LED Pins
+int redPin   = 9;
+int greenPin = 10;
+int bluePin  = 11;
+
+
+// ==============================
+// SETUP FUNCTION
+// ==============================
+void setup() {
+
+  // Configure RGB pins as OUTPUT
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  pinMode(bluePin, OUTPUT);
+}
+
+
+// ==============================
+// MAIN LOOP
+// ==============================
+void loop() {
+
+  // ==============================
+  // DISPLAY DIFFERENT COLORS
+  // ==============================
+
+  // Red
+  setColor(255, 0, 0);
+  delay(1000);
+
+  // Green
+  setColor(0, 255, 0);
+  delay(1000);
+
+  // Blue
+  setColor(0, 0, 255);
+  delay(1000);
+
+  // Yellow
+  setColor(255, 255, 0);
+  delay(1000);
+
+  // Cyan
+  setColor(0, 255, 255);
+  delay(1000);
+
+  // Magenta
+  setColor(255, 0, 255);
+  delay(1000);
+
+  // White
+  setColor(255, 255, 255);
+  delay(1000);
+
+  // Turn OFF LED
+  setColor(0, 0, 0);
+  delay(1000);
+}
+
+
+// ==============================
+// FUNCTION TO SET RGB COLOR
+// ==============================
+void setColor(int red, int green, int blue) {
+
+  // Control brightness of each color
+  analogWrite(redPin, red);
+  analogWrite(greenPin, green);
+  analogWrite(bluePin, blue);
+}
