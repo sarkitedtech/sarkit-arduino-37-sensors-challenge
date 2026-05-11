@@ -1,0 +1,69 @@
+/*
+==========================================
+SARKIT EdTech Project
+Title: Shock Sensor with Buzzer using Arduino
+Description:
+This project detects vibration or sudden impact
+using a shock sensor module. When shock is
+detected, the buzzer turns ON and an alert
+message is displayed on the Serial Monitor.
+
+Author: SARKIT EdTech
+==========================================
+*/
+
+
+// ==============================
+// PIN DEFINITIONS
+// ==============================
+int shockSensor = 2;   // Shock sensor digital output pin
+int buzzer      = 8;   // Buzzer pin
+
+
+// ==============================
+// SETUP FUNCTION
+// ==============================
+void setup() {
+
+  // Configure pin modes
+  pinMode(shockSensor, INPUT);
+  pinMode(buzzer, OUTPUT);
+
+  // Start serial communication
+  Serial.begin(9600);
+}
+
+
+// ==============================
+// MAIN LOOP
+// ==============================
+void loop() {
+
+  // Read shock sensor value
+  int sensorValue = digitalRead(shockSensor);
+
+
+  // ==============================
+  // SHOCK DETECTION LOGIC
+  // ==============================
+  if (sensorValue == HIGH) {
+
+    // Turn ON buzzer
+    digitalWrite(buzzer, HIGH);
+
+    // Print alert message
+    Serial.println("⚡ Shock Detected!");
+
+  } else {
+
+    // Turn OFF buzzer
+    digitalWrite(buzzer, LOW);
+
+    // Optional status message
+    // Serial.println("No Shock");
+  }
+
+
+  // Small delay for stable readings
+  delay(50);
+}
