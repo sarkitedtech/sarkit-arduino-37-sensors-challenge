@@ -1,0 +1,69 @@
+/*
+==========================================
+SARKIT EdTech Project
+Title: Tilt Switch Alarm using Arduino
+Description:
+This project uses a tilt switch to detect
+orientation changes. When the sensor is tilted,
+a buzzer generates a warning sound and the
+sensor state is displayed on the Serial Monitor.
+
+Author: SARKIT EdTech
+==========================================
+*/
+
+
+// ==============================
+// PIN DEFINITIONS
+// ==============================
+int tiltPin   = 2;   // Tilt switch digital output pin
+int buzzerPin = 8;   // Buzzer pin
+
+
+// ==============================
+// SETUP FUNCTION
+// ==============================
+void setup() {
+
+  // Configure pin modes
+  pinMode(tiltPin, INPUT);
+  pinMode(buzzerPin, OUTPUT);
+
+  // Start serial communication
+  Serial.begin(9600);
+}
+
+
+// ==============================
+// MAIN LOOP
+// ==============================
+void loop() {
+
+  // Read tilt sensor state
+  int tiltState = digitalRead(tiltPin);
+
+  // Print sensor state to Serial Monitor
+  Serial.println(tiltState);
+
+
+  // ==============================
+  // TILT DETECTION LOGIC
+  // ==============================
+  if (tiltState == HIGH) {
+
+    // Generate 1.8 kHz tone on buzzer
+    tone(buzzerPin, 1800);
+
+    // Optional debug message
+    // Serial.println("Tilt Detected!");
+
+  } else {
+
+    // Stop buzzer when sensor is in normal position
+    noTone(buzzerPin);
+  }
+
+
+  // Small delay for stable readings
+  delay(100);
+}
