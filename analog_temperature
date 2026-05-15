@@ -1,0 +1,46 @@
+#include <math.h>
+
+/*
+==========================================
+SARKIT EdTech Project
+Title: KY-013 Analog Temperature Sensor
+Description:
+Reads temperature from the KY-013 thermistor
+sensor and displays the result in Celsius.
+
+Author: SARKIT EdTech
+==========================================
+*/
+
+#define THERMISTORPIN A0   // KY-013 analog output pin
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("KY-013 Temperature Sensor");
+}
+
+void loop() {
+
+  int Vo = analogRead(THERMISTORPIN);   // Read analog value
+
+  // Calculate thermistor resistance
+  float R = 1023.0 / Vo - 1.0;
+  R = 10000.0 * R;
+
+  // Apply Steinhart-Hart equation
+  float temperature = R / 10000.0;
+  temperature = log(temperature);
+  temperature /= 3950.0;
+  temperature += 1.0 / (25.0 + 273.15);
+  temperature = 1.0 / temperature;
+  temperature -= 273.15;   // Convert Kelvin to Celsius
+
+  temperature -= 37;       // Calibration correction
+
+  // Display temperature
+  Serial.print("Temperature: ");
+  Serial.print(temperature);
+  Serial.println(" °C");
+
+  delay(1000);             // Update every 1 second
+}
