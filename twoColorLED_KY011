@@ -1,0 +1,44 @@
+/*
+==========================================
+SARKIT EdTech Project
+Title: KY-011 Two Color LED Module with Arduino
+Description:
+This project demonstrates how to control
+a two-color LED module (Red and Green).
+By turning both LEDs ON together, an
+additional mixed color can be observed.
+
+Author: SARKIT EdTech
+==========================================
+*/
+
+int redPin = 9;      // Red LED pin
+int greenPin = 10;   // Green LED pin
+
+void setup() {
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+}
+
+void loop() {
+
+  // Red LED ON
+  digitalWrite(redPin, HIGH);
+  digitalWrite(greenPin, LOW);
+  delay(1000);
+
+  // Green LED ON
+  digitalWrite(redPin, LOW);
+  digitalWrite(greenPin, HIGH);
+  delay(1000);
+
+  // Both LEDs ON (mixed color)
+  digitalWrite(redPin, HIGH);
+  digitalWrite(greenPin, HIGH);
+  delay(1000);
+
+  // Both LEDs OFF
+  digitalWrite(redPin, LOW);
+  digitalWrite(greenPin, LOW);
+  delay(1000);
+}
