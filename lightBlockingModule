@@ -1,0 +1,34 @@
+/*
+==========================================
+SARKIT EdTech Project
+Title: Light Blocking Diode Module with Arduino
+Description:
+This project uses a photo interrupter
+(light blocking diode) to detect when an
+object passes between the IR transmitter
+and receiver. The LED turns ON when an
+object is detected.
+
+Author: SARKIT EdTech
+==========================================
+*/
+
+int sensorPin = 2;   // Sensor digital output pin
+int ledPin    = 7;   // LED pin
+
+void setup() {
+  pinMode(sensorPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+
+  int sensorValue = digitalRead(sensorPin);   // Read sensor state
+
+  // Most photo interrupters output LOW when blocked
+  if (sensorValue == LOW) {
+    digitalWrite(ledPin, HIGH);   // Object detected → LED ON
+  } else {
+    digitalWrite(ledPin, LOW);    // No object → LED OFF
+  }
+}
