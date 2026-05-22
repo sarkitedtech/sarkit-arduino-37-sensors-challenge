@@ -1,0 +1,58 @@
+#include <DHT.h>
+
+/*
+==========================================
+SARKIT EdTech Project
+Title: DHT11 Temperature & Humidity Sensor
+Description:
+This project reads temperature and humidity
+data using the DHT11 sensor and displays
+the values on the Serial Monitor.
+
+Author: SARKIT EdTech
+==========================================
+*/
+
+#define DHTPIN 2        // DHT11 data pin
+#define DHTTYPE DHT11  // Sensor type
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+
+  Serial.begin(9600);
+
+  dht.begin();
+
+  Serial.println("DHT11 Sensor Test");
+}
+
+void loop() {
+
+  float humidity = dht.readHumidity();        // Read humidity
+  float temperature = dht.readTemperature();  // Read temperature
+
+
+  // Check if sensor reading failed
+  if (isnan(humidity) || isnan(temperature)) {
+
+    Serial.println("Failed to read from DHT11!");
+
+    return;
+  }
+
+
+  // Display temperature
+  Serial.print("Temperature: ");
+  Serial.print(temperature);
+  Serial.println(" °C");
+
+  // Display humidity
+  Serial.print("Humidity: ");
+  Serial.print(humidity);
+  Serial.println(" %");
+
+  Serial.println();
+
+  delay(2000);   // Update every 2 seconds
+}
