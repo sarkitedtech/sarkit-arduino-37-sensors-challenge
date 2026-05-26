@@ -1,0 +1,45 @@
+/*
+==========================================
+SARKIT EdTech Project
+Title: Linear Hall Magnetic Sensor with Arduino
+Description:
+This project uses a linear Hall sensor to
+detect magnetic fields. The analog value
+and magnet detection status are displayed
+on the Serial Monitor.
+
+Author: SARKIT EdTech
+==========================================
+*/
+
+int analogPin  = A0;   // Analog output pin
+int digitalPin = 2;    // Digital output pin
+
+void setup() {
+
+  pinMode(digitalPin, INPUT);
+
+  Serial.begin(9600);
+
+  Serial.println("Linear Hall Sensor Test");
+}
+
+void loop() {
+
+  int analogValue = analogRead(analogPin);     // Read analog output
+  int digitalValue = digitalRead(digitalPin);  // Read digital output
+
+  Serial.print("Analog Value: ");
+  Serial.print(analogValue);
+
+  Serial.print("   ");
+
+  // Check magnet detection
+  if (digitalValue == LOW) {
+    Serial.println("Magnet Detected");
+  } else {
+    Serial.println("No Magnet");
+  }
+
+  delay(200);   // Small delay for stable readings
+}
