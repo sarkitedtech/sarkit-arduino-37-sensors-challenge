@@ -1,0 +1,48 @@
+/*
+==========================================
+SARKIT EdTech Project
+Title: Push Button LED Toggle using Arduino
+Description:
+This project uses a push button to toggle
+an LED ON and OFF. Each button press
+changes the LED state.
+
+Author: SARKIT EdTech
+==========================================
+*/
+
+int ledPin = 7;      // LED pin
+int buttonPin = 2;   // Push button pin
+
+bool ledState = false;          // Store LED state
+bool lastButtonState = HIGH;    // Previous button state
+
+void setup() {
+
+  pinMode(ledPin, OUTPUT);
+
+  // Enable internal pull-up resistor
+  pinMode(buttonPin, INPUT_PULLUP);
+
+  // Start with LED OFF
+  digitalWrite(ledPin, LOW);
+}
+
+void loop() {
+
+  bool buttonState = digitalRead(buttonPin);   // Read button state
+
+
+  // Detect button press
+  if (lastButtonState == HIGH && buttonState == LOW) {
+
+    ledState = !ledState;   // Toggle LED state
+
+    digitalWrite(ledPin, ledState);
+
+    delay(200);   // Debounce delay
+  }
+
+  // Store current button state
+  lastButtonState = buttonState;
+}
